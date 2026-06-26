@@ -21,3 +21,19 @@ jobs:
 
       - name: Validate index.html with HTMLHint
         run: npx --yes htmlhint@1.6.3 --config .htmlhintrc index.html
+
+      - name: Check legal links are reachable
+        run: |
+          set -euo pipefail
+          urls=(
+            "https://smrtadvice.es/aviso-legal"
+            "https://smrtadvice.es/privacidad"
+            "https://smrtadvice.es/politica-cookies"
+            "https://smrtadvice.es/terminos-uso"
+            "https://smrtadvice.es/condiciones-contratacion"
+          )
+
+          for url in "${urls[@]}"; do
+            echo "Checking $url"
+            curl -fsSLI --retry 2 --retry-all-errors --max-time 20 "$url" > /dev/null
+          done
