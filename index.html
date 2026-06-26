@@ -219,6 +219,8 @@ header.nav{
 .c-gen{color:var(--muted);font-size:14.5px;background:#FAFCFB}
 .c-sa{background:#F3F9F6;font-weight:600;font-size:14.5px;color:#163F34;gap:9px}
 .c-sa .ck{color:var(--teal);flex:0 0 auto;margin-top:1px}
+.cmp-tag{display:none}
+.c-sa .cmp-val{display:inline-flex;align-items:flex-start;gap:9px}
 .cmp-foot{margin-top:34px;text-align:center;color:var(--muted);font-size:16px}
 .cmp-foot b{color:var(--ink)}
 
@@ -263,15 +265,17 @@ header.nav{
 
 /* pillars */
 .pillar{background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.12);border-radius:16px;padding:28px}
-.pillar .num{font-family:"Spectral";font-size:14px;font-weight:700;color:var(--teal-soft);letter-spacing:.1em}
-.pillar .ttl{font-family:"Spectral";font-weight:600;font-size:20px;color:#fff;margin:14px 0 10px;line-height:1.22}
+.pillar-head{display:flex;align-items:baseline;gap:12px;margin-bottom:10px}
+.pillar .num{font-family:"Spectral";font-size:22px;font-weight:700;color:var(--teal-soft);letter-spacing:.06em;flex:0 0 auto}
+.pillar .ttl{font-family:"Spectral";font-weight:600;font-size:20px;color:#fff;margin:0;line-height:1.22}
 .pillar p{color:#A9C6BC;font-size:14.5px}
 
 /* profesionales */
 .pro-card{display:flex;flex-direction:column;gap:8px;background:#fff;border:1px solid var(--line);border-radius:15px;padding:22px;box-shadow:var(--shadow-sm);transition:transform .18s,box-shadow .2s,border-color .2s}
 .pro-card:hover{transform:translateY(-3px);box-shadow:var(--shadow);border-color:var(--line-strong)}
-.pro-ic{width:40px;height:40px;border-radius:11px;background:linear-gradient(150deg,var(--brand-700),var(--brand-900));display:flex;align-items:center;justify-content:center}
-.pro-card .ttl{font-family:"Spectral";font-weight:600;font-size:17px;margin-top:4px}
+.pro-ic{width:40px;height:40px;border-radius:11px;background:linear-gradient(150deg,var(--brand-700),var(--brand-900));display:flex;align-items:center;justify-content:center;flex:0 0 auto}
+.pro-head{display:flex;align-items:center;gap:12px}
+.pro-card .ttl{font-family:"Spectral";font-weight:600;font-size:17px;margin-top:0}
 .pro-card p{color:var(--muted);font-size:14px}
 .pro-banner{display:flex;gap:16px;align-items:flex-start;background:#fff;border:1px solid var(--line);border-radius:16px;padding:24px 26px;margin-top:30px;box-shadow:var(--shadow-sm)}
 .pro-banner p{color:var(--muted);font-size:15.5px}
@@ -366,21 +370,38 @@ footer{background:#fff;border-top:1px solid var(--line);padding:62px 0 0}
 }
 @media(max-width:760px){
   .sec-pad{padding:64px 0}
-  .g2,.g4,.price-grid,.faq-grid,.foot-grid{grid-template-columns:1fr}
-  .plan.pop{transform:none;margin-top:8px}
+  .g2,.g4,.faq-grid,.foot-grid{grid-template-columns:1fr}
+  /* precios: carrusel horizontal para poder comparar */
+  .price-grid{
+    display:flex;gap:12px;overflow-x:auto;
+    scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;
+    padding:20px 28px 10px;margin:0 -28px;scroll-padding-left:28px;
+  }
+  .plan{flex:0 0 73%;max-width:270px;scroll-snap-align:start;padding:24px 20px}
+  .plan .price{font-size:34px}
+  .plan .pdesc{min-height:0}
+  /* el plan recomendado (Pro) aparece primero */
+  .plan.pop{order:-1;transform:none;margin-top:0;padding-top:32px}
   .plan.pop:hover{transform:translateY(-4px)}
   .plan:hover{transform:translateY(-4px)}
-  .cmp-row{grid-template-columns:1fr}
-  .cmp-row>div{border-top:1px solid var(--line)}
+  /* comparativa: cada fila como bloque con etiquetas */
+  .cmp{border-radius:16px}
+  .cmp-row{grid-template-columns:1fr;border-top:7px solid var(--bg-soft)}
+  .cmp-row:first-child{border-top:0}
+  .cmp-row>div{padding:13px 18px;border-top:1px solid var(--line)}
   .cmp-h{display:none}
+  .c-feat{background:var(--brand-900);color:#fff;font-size:15px;border-top:0}
+  .c-gen,.c-sa{flex-direction:column;align-items:flex-start;gap:3px}
+  .cmp-tag{display:inline-block;font-size:10.5px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--muted-2)}
+  .c-sa .cmp-tag{color:var(--teal-600)}
   .mini-grid{grid-template-columns:1fr}
   .hero h1{font-size:34px}
-  .nav-inner{height:64px;gap:14px}
-  .brand{gap:8px;font-size:16px}
+  .nav-inner{height:64px;gap:12px}
+  .brand{gap:8px;font-size:16px;white-space:nowrap;flex:0 0 auto}
   .brand .mark{height:26px}
   .nav-right{gap:0}
-  .nav-cta{padding:12px 18px;font-size:13px;border-radius:12px}
-  .nav-cta svg{width:14px;height:14px}
+  .nav-cta{padding:10px 14px;font-size:12.5px;border-radius:11px}
+  .nav-cta svg{display:none}
 }
 </style>
 </head>
@@ -448,7 +469,6 @@ function Hero(){
   return (
     <section className="hero center" id="top">
       <div className="wrap">
-        <span className="badge"><Check/> IA Validada · Basada en legislación española vigente</span>
         <h1 className="serif">Tu copiloto empresarial: <span className="accent">decisiones informadas,</span> riesgos bajo control</h1>
         <p className="lead">Smart Advice combina inteligencia artificial con el respaldo de profesionales especializados para ayudarte a gestionar riesgos legales, industriales, de ciberseguridad y seguros — todo en un solo lugar, a un coste accesible.</p>
         <div className="hero-cta">
@@ -559,8 +579,14 @@ function Comparativa(){
           {rows.map((r,i)=>(
             <div className="cmp-row" key={i}>
               <div className="c-feat">{r[0]}</div>
-              <div className="c-gen">— {r[1]}</div>
-              <div className="c-sa"><Check/> {r[2]}</div>
+              <div className="c-gen">
+                <span className="cmp-tag">IA genérica</span>
+                <span className="cmp-val">— {r[1]}</span>
+              </div>
+              <div className="c-sa">
+                <span className="cmp-tag">Smart Advice</span>
+                <span className="cmp-val"><Check/> {r[2]}</span>
+              </div>
             </div>
           ))}
         </div>
@@ -695,8 +721,10 @@ function Pilares(){
         <div className="grid g3">
           {pillars.map((p,i)=>(
             <div className="pillar" key={i}>
-              <div className="num">{p[0]}</div>
-              <div className="ttl">{p[1]}</div>
+              <div className="pillar-head">
+                <span className="num">{p[0]}</span>
+                <div className="ttl">{p[1]}</div>
+              </div>
               <p>{p[2]}</p>
             </div>
           ))}
@@ -729,8 +757,10 @@ function Profesionales(){
         <div className="grid g4">
           {pros.map((p,i)=>(
             <div className="pro-card" key={i}>
-              <div className="pro-ic"><Glyph/></div>
-              <div className="ttl">{p[0]}</div>
+              <div className="pro-head">
+                <div className="pro-ic"><Glyph/></div>
+                <div className="ttl">{p[0]}</div>
+              </div>
               <p>{p[1]}</p>
             </div>
           ))}
