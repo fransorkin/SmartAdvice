@@ -1,0 +1,904 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Smart Advice — Tu copiloto empresarial</title>
+<meta name="description" content="Smart Advice combina inteligencia artificial con el respaldo de profesionales especializados para gestionar riesgos legales, industriales, de ciberseguridad y seguros." />
+<link rel="icon" type="image/png" href="https://framerusercontent.com/images/FlcTYSpAwveQR4z2IwyTfAUJQ.png" />
+<link rel="apple-touch-icon" href="https://framerusercontent.com/images/FlcTYSpAwveQR4z2IwyTfAUJQ.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,500;0,600;0,700;0,800;1,500;1,600&family=Libre+Franklin:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
+<script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.5/babel.min.js"></script>
+<style>
+:root{
+  --ink:#0B2A23;
+  --brand-900:#0B362C;
+  --brand-800:#0F4537;
+  --brand-700:#155547;
+  --teal:#1E9C80;
+  --teal-600:#178a70;
+  --teal-soft:#7FB6A7;
+  --sage:#9DBBB1;
+  --bg:#ffffff;
+  --bg-soft:#F1F6F3;
+  --bg-soft2:#E9F1ED;
+  --line:#E1E9E5;
+  --line-strong:#CDD9D3;
+  --muted:#566B64;
+  --muted-2:#7C8C86;
+  --red:#C8443A; --red-bg:#FBE8E6;
+  --orange:#BC6E22; --orange-bg:#FAEFDF;
+  --green:#2C8568; --green-bg:#E3F1EB;
+  --radius:18px;
+  --shadow-sm:0 1px 2px rgba(11,42,35,.05), 0 1px 1px rgba(11,42,35,.04);
+  --shadow:0 18px 40px -24px rgba(11,42,35,.28), 0 4px 12px -6px rgba(11,42,35,.10);
+  --maxw:1200px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:"Libre Franklin",-apple-system,system-ui,sans-serif;
+  color:var(--ink);
+  background:var(--bg);
+  -webkit-font-smoothing:antialiased;
+  line-height:1.55;
+  letter-spacing:-.004em;
+}
+a{color:inherit;text-decoration:none}
+.serif{font-family:"Spectral",Georgia,serif}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 28px}
+.eyebrow{
+  font-size:12.5px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--teal-600);
+}
+.tag-pill{
+  display:inline-flex;align-items:center;gap:8px;
+  font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--teal-600);background:var(--bg-soft2);
+  border:1px solid var(--line);border-radius:999px;padding:7px 14px;
+}
+h1,h2,h3{font-family:"Spectral",Georgia,serif;font-weight:700;letter-spacing:-.018em;line-height:1.1;color:var(--ink)}
+section{position:relative}
+.sec-pad{padding:96px 0}
+.sec-dark{background:var(--brand-900);color:#EAF3EF}
+.sec-soft{background:var(--bg-soft)}
+.center{text-align:center}
+.lead{color:var(--muted);font-size:18px;max-width:640px}
+.sec-dark .lead{color:#A9C6BC}
+
+/* ---- buttons : tactile, layered depth ---- */
+.btn{
+  position:relative;
+  display:inline-flex;align-items:center;justify-content:center;gap:9px;
+  font-family:"Libre Franklin",sans-serif;font-weight:700;font-size:15px;letter-spacing:.005em;
+  border-radius:13px;padding:15px 26px;cursor:pointer;border:1px solid transparent;
+  transition:transform .14s cubic-bezier(.3,.7,.4,1), box-shadow .18s ease, filter .18s ease;
+  white-space:nowrap;-webkit-tap-highlight-color:transparent;
+}
+.btn:active{transform:translateY(1px) scale(.997)}
+
+/* dark / primary */
+.btn-primary{
+  color:#fff;border-color:#082a22;
+  background:linear-gradient(180deg,#1a4d40 0%,#103a2f 52%,#0c2f26 100%);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.18),
+    inset 0 -2px 4px rgba(0,0,0,.28),
+    0 2px 3px rgba(8,33,27,.28),
+    0 10px 22px -8px rgba(8,33,27,.55);
+}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.22),
+    inset 0 -2px 4px rgba(0,0,0,.28),
+    0 4px 6px rgba(8,33,27,.3),
+    0 18px 32px -10px rgba(8,33,27,.6);filter:brightness(1.06)}
+.btn-primary:active{box-shadow:inset 0 2px 5px rgba(0,0,0,.4),0 2px 5px rgba(8,33,27,.4)}
+
+/* teal / accent */
+.btn-teal{
+  color:#fff;border-color:#0f7a62;
+  background:linear-gradient(180deg,#2bbd9c 0%,#1e9c80 50%,#178a70 100%);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.4),
+    inset 0 -2px 5px rgba(6,70,56,.35),
+    0 2px 3px rgba(15,122,98,.3),
+    0 12px 24px -8px rgba(15,122,98,.6);
+}
+.btn-teal:hover{transform:translateY(-2px);box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.5),
+    inset 0 -2px 5px rgba(6,70,56,.35),
+    0 5px 8px rgba(15,122,98,.32),
+    0 20px 36px -10px rgba(15,122,98,.7);filter:brightness(1.05)}
+.btn-teal:active{box-shadow:inset 0 2px 6px rgba(6,70,56,.5),0 2px 5px rgba(15,122,98,.4)}
+
+/* ghost / secondary - still clearly a raised button */
+.btn-ghost{
+  color:var(--ink);border-color:#cdd9d3;
+  background:linear-gradient(180deg,#ffffff 0%,#eef4f1 100%);
+  box-shadow:
+    inset 0 1px 0 #ffffff,
+    0 1px 2px rgba(11,42,35,.08),
+    0 8px 18px -10px rgba(11,42,35,.3);
+}
+.btn-ghost:hover{transform:translateY(-2px);border-color:#aebfb8;box-shadow:
+    inset 0 1px 0 #ffffff,
+    0 2px 4px rgba(11,42,35,.1),
+    0 16px 28px -12px rgba(11,42,35,.36)}
+.btn-ghost:active{box-shadow:inset 0 2px 4px rgba(11,42,35,.12)}
+/* ghost on dark sections */
+.sec-dark .btn-ghost{
+  color:#fff;border-color:rgba(255,255,255,.28);
+  background:linear-gradient(180deg,rgba(255,255,255,.14),rgba(255,255,255,.05));
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.22),0 10px 22px -12px rgba(0,0,0,.5);
+}
+.sec-dark .btn-ghost:hover{border-color:rgba(255,255,255,.55);background:linear-gradient(180deg,rgba(255,255,255,.2),rgba(255,255,255,.08))}
+.btn-light{background:#fff;color:var(--ink)}
+
+/* ---- header ---- */
+header.nav{
+  position:sticky;top:0;z-index:50;background:rgba(255,255,255,.86);
+  backdrop-filter:saturate(160%) blur(12px);border-bottom:1px solid var(--line);
+}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;height:70px}
+.brand{display:flex;align-items:center;gap:11px;font-family:"Libre Franklin",sans-serif;font-weight:700;font-size:20px;letter-spacing:-.01em;color:var(--ink)}
+.brand .mark{height:30px;width:auto;flex:0 0 auto;display:block}
+.nav-links{display:flex;align-items:center;gap:30px}
+.nav-links a{font-size:15px;font-weight:600;color:#33453F}
+.nav-links a:hover{color:var(--teal-600)}
+.nav-right{display:flex;align-items:center;gap:20px}
+.nav-login{font-size:15px;font-weight:600;color:#33453F}
+.nav-login:hover{color:var(--teal-600)}
+.menu-btn{display:none;background:none;border:0;cursor:pointer}
+
+/* ---- hero ---- */
+.hero{padding:78px 0 92px;background:
+   radial-gradient(900px 420px at 50% -120px, #E6F1EC 0%, rgba(230,241,236,0) 70%),#fff;}
+.hero .badge{
+  display:inline-flex;align-items:center;gap:9px;font-size:13.5px;font-weight:600;
+  color:#2E5247;background:#fff;border:1px solid var(--line-strong);
+  border-radius:999px;padding:8px 16px;box-shadow:var(--shadow-sm);
+}
+.hero h1{font-size:clamp(38px,5.4vw,68px);max-width:14ch;margin:24px auto 0}
+.hero h1 .accent{font-style:italic;font-weight:500;color:var(--teal)}
+.hero .lead{margin:24px auto 0;font-size:19px}
+.hero-cta{display:flex;gap:14px;justify-content:center;margin-top:34px;flex-wrap:wrap}
+.trust{display:flex;gap:26px;justify-content:center;margin-top:28px;flex-wrap:wrap;
+  font-size:14px;font-weight:600;color:var(--muted)}
+.trust span{display:inline-flex;align-items:center;gap:7px}
+.trust .ck{color:var(--teal)}
+
+/* ---- grids ---- */
+.grid{display:grid;gap:22px}
+.g2{grid-template-columns:repeat(2,1fr)}
+.g3{grid-template-columns:repeat(3,1fr)}
+.g4{grid-template-columns:repeat(4,1fr)}
+.head-block{max-width:760px;margin:0 auto 56px}
+.head-left{margin:0 0 52px;max-width:760px}
+
+/* ---- generic card ---- */
+.card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:26px;
+  box-shadow:var(--shadow-sm);transition:transform .18s ease, box-shadow .2s ease, border-color .2s}
+.card:hover{transform:translateY(-3px);box-shadow:var(--shadow);border-color:var(--line-strong)}
+.card .ttl{font-family:"Spectral";font-weight:600;font-size:19px;margin:14px 0 8px;line-height:1.25}
+.card p{color:var(--muted);font-size:15px}
+.kicker{font-size:11.5px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:var(--teal-600)}
+
+/* prevención dark cards */
+.prev-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.12);border-radius:16px;padding:24px}
+.prev-card .kicker{color:var(--teal-soft)}
+.prev-card .ttl{font-family:"Spectral";font-weight:600;font-size:18px;color:#fff;margin:12px 0 9px;line-height:1.25}
+.prev-card p{color:#A9C6BC;font-size:14.5px}
+.afterline{margin-top:46px;text-align:center;font-weight:700;font-size:17px;color:#DCEAE4}
+.afterline em{font-style:normal;color:var(--teal-soft)}
+
+/* quote cards */
+.q-card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:24px 24px 26px;box-shadow:var(--shadow-sm);transition:transform .18s,box-shadow .2s,border-color .2s}
+.q-card:hover{transform:translateY(-3px);box-shadow:var(--shadow);border-color:var(--line-strong)}
+.q-card .qm{font-family:"Spectral";font-size:34px;line-height:.6;color:var(--teal);font-weight:700}
+.q-card p{font-family:"Spectral";font-style:italic;font-size:16.5px;color:#2C3B36;margin-top:14px}
+.center-note{margin-top:46px;text-align:center;font-weight:700;font-size:17px;color:var(--ink)}
+
+/* comparison table */
+.cmp{max-width:1000px;margin:0 auto;border:1px solid var(--line);border-radius:20px;overflow:hidden;background:#fff;box-shadow:var(--shadow)}
+.cmp-row{display:grid;grid-template-columns:1.1fr 1.3fr 1.3fr;border-top:1px solid var(--line)}
+.cmp-row:first-child{border-top:0}
+.cmp-row>div{padding:20px 24px;display:flex;align-items:center}
+.cmp-h{background:#fff}
+.cmp-h .c-feat{font-weight:700}
+.cmp-h .c-gen{flex-direction:column;align-items:flex-start;background:#F4F7F5}
+.cmp-h .c-gen b{font-weight:800;letter-spacing:.04em}
+.cmp-h .c-gen small{color:var(--muted-2);font-weight:600;font-size:11.5px;margin-top:3px}
+.cmp-h .c-sa{background:var(--brand-900);color:#fff;font-weight:800;letter-spacing:.04em;justify-content:center}
+.c-feat{font-weight:700;font-size:15.5px;color:var(--ink)}
+.c-gen{color:var(--muted);font-size:14.5px;background:#FAFCFB}
+.c-sa{background:#F3F9F6;font-weight:600;font-size:14.5px;color:#163F34;gap:9px}
+.c-sa .ck{color:var(--teal);flex:0 0 auto;margin-top:1px}
+.cmp-foot{margin-top:34px;text-align:center;color:var(--muted);font-size:16px}
+.cmp-foot b{color:var(--ink)}
+
+/* product mockups */
+.mock{background:#fff;border:1px solid var(--line);border-radius:18px;overflow:hidden;box-shadow:var(--shadow)}
+.mock-bar{background:var(--brand-900);display:flex;align-items:center;gap:9px;padding:13px 18px}
+.dot{width:11px;height:11px;border-radius:50%}
+.mock-title{color:#CDE3DB;font-size:12px;font-weight:700;letter-spacing:.06em;margin-left:8px}
+.mock-body{padding:22px}
+.mock-step{font-size:11px;font-weight:700;letter-spacing:.1em;color:var(--teal-600);text-transform:uppercase;margin-bottom:16px}
+.bubble-user{background:var(--brand-800);color:#EAF3EF;border-radius:16px 16px 4px 16px;padding:14px 16px;font-size:14px;margin-left:auto;max-width:86%}
+.bubble-ai{background:var(--bg-soft);border:1px solid var(--line);border-radius:16px 16px 16px 4px;padding:14px 16px;font-size:14px;color:#2A3A35;margin-top:14px;max-width:92%}
+.bubble-ai b{font-weight:700}
+.chips{display:flex;flex-wrap:wrap;gap:7px;margin-top:12px}
+.chip{font-size:11px;font-weight:700;color:var(--teal-600);background:var(--bg-soft2);border:1px solid var(--line);border-radius:7px;padding:4px 9px}
+.risk{border-radius:12px;padding:13px 15px;margin-top:12px;border:1px solid var(--line)}
+.risk h5{font-size:12.5px;font-weight:800;letter-spacing:.02em;margin-bottom:5px}
+.risk p{font-size:13px;color:var(--muted)}
+.risk.hi{background:#FCEFEE;border-color:#F3D6D3}.risk.hi h5{color:var(--red)}
+.risk.mid{background:#FBF2E6;border-color:#F0DEC4}.risk.mid h5{color:var(--orange)}
+.risk.ok{background:var(--green-bg);border-color:#CBE5D9}.risk.ok h5{color:var(--green)}
+.panel-row{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:13px 2px;border-top:1px solid var(--line)}
+.panel-row:first-child{border-top:0}
+.panel-row span{font-size:14px;font-weight:600;color:#2A3A35}
+.badge-st{font-size:11.5px;font-weight:700;border-radius:999px;padding:5px 11px;white-space:nowrap}
+.st-red{background:var(--red-bg);color:var(--red)}
+.st-or{background:var(--orange-bg);color:var(--orange)}
+.st-gr{background:var(--green-bg);color:var(--green)}
+.prof-btn{background:var(--brand-900);color:#fff;border-radius:14px;padding:16px;text-align:center;margin-top:16px}
+.prof-btn b{font-size:14.5px}
+.prof-btn small{display:block;color:#A9C6BC;font-size:12px;margin-top:4px}
+.mini-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}
+.mini{border:1px solid var(--line);border-radius:11px;padding:12px 13px}
+.mini b{font-size:13.5px}.mini small{display:block;color:var(--muted-2);font-size:12px;margin-top:2px}
+
+/* areas */
+.area{display:flex;gap:16px;background:#fff;border:1px solid var(--line);border-radius:15px;padding:20px 22px;box-shadow:var(--shadow-sm);transition:transform .18s,box-shadow .2s,border-color .2s}
+.area:hover{transform:translateY(-2px);box-shadow:var(--shadow);border-color:var(--line-strong)}
+.area .cat{flex:0 0 auto;font-size:10.5px;font-weight:800;letter-spacing:.08em;color:var(--teal-600);background:var(--bg-soft2);border-radius:7px;padding:6px 9px;height:fit-content}
+.area .ttl{font-family:"Spectral";font-weight:600;font-size:17px;margin-bottom:5px}
+.area p{color:var(--muted);font-size:14px}
+
+/* pillars */
+.pillar{background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.12);border-radius:16px;padding:28px}
+.pillar .num{font-family:"Spectral";font-size:14px;font-weight:700;color:var(--teal-soft);letter-spacing:.1em}
+.pillar .ttl{font-family:"Spectral";font-weight:600;font-size:20px;color:#fff;margin:14px 0 10px;line-height:1.22}
+.pillar p{color:#A9C6BC;font-size:14.5px}
+
+/* profesionales */
+.pro-card{display:flex;flex-direction:column;gap:8px;background:#fff;border:1px solid var(--line);border-radius:15px;padding:22px;box-shadow:var(--shadow-sm);transition:transform .18s,box-shadow .2s,border-color .2s}
+.pro-card:hover{transform:translateY(-3px);box-shadow:var(--shadow);border-color:var(--line-strong)}
+.pro-ic{width:40px;height:40px;border-radius:11px;background:linear-gradient(150deg,var(--brand-700),var(--brand-900));display:flex;align-items:center;justify-content:center}
+.pro-card .ttl{font-family:"Spectral";font-weight:600;font-size:17px;margin-top:4px}
+.pro-card p{color:var(--muted);font-size:14px}
+.pro-banner{display:flex;gap:16px;align-items:flex-start;background:#fff;border:1px solid var(--line);border-radius:16px;padding:24px 26px;margin-top:30px;box-shadow:var(--shadow-sm)}
+.pro-banner p{color:var(--muted);font-size:15.5px}
+.pro-banner b{color:var(--ink)}
+
+/* steps */
+.step .n{font-family:"Spectral";font-size:62px;font-weight:600;color:var(--teal-soft);line-height:1}
+.step .ttl{font-family:"Spectral";font-weight:600;font-size:20px;margin:10px 0 10px;border-top:1px solid var(--line);padding-top:18px}
+.step p{color:var(--muted);font-size:15px}
+
+/* pricing */
+.price-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:22px;align-items:stretch}
+.plan{background:#fff;border:1.5px solid var(--line-strong);border-radius:18px;padding:30px 24px;position:relative;
+  display:flex;flex-direction:column;
+  box-shadow:0 1px 2px rgba(11,42,35,.06),0 12px 26px -20px rgba(11,42,35,.3);
+  transition:transform .18s ease, box-shadow .2s ease, border-color .2s}
+.plan:hover{transform:translateY(-5px);border-color:#9CC1B6;box-shadow:0 1px 2px rgba(11,42,35,.06),0 22px 44px -24px rgba(11,42,35,.42)}
+.plan .btn{margin-top:auto}
+/* PRO destacado */
+.plan.pop{
+  border:2.5px solid var(--teal);
+  background:linear-gradient(180deg,#F2FBF7 0%,#ffffff 58%);
+  box-shadow:0 0 0 5px rgba(30,156,128,.12), 0 30px 56px -24px rgba(15,122,98,.55);
+  transform:translateY(-14px) scale(1.025);padding-top:40px;z-index:2;
+}
+.plan.pop:hover{transform:translateY(-19px) scale(1.025);box-shadow:0 0 0 5px rgba(30,156,128,.16), 0 38px 64px -24px rgba(15,122,98,.6)}
+.plan.pop .pname{color:var(--teal-600)}
+.plan.pop .price{color:var(--teal-600)}
+.pop-tag{position:absolute;top:-15px;left:50%;transform:translateX(-50%);
+  background:linear-gradient(180deg,#2BBD9C,#178A70);color:#fff;font-size:12px;font-weight:800;letter-spacing:.05em;
+  border-radius:999px;padding:8px 18px;white-space:nowrap;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.4),0 8px 16px -5px rgba(15,122,98,.6)}
+.plan .pname{font-size:12px;font-weight:800;letter-spacing:.13em;text-transform:uppercase;color:var(--muted-2)}
+.plan .price{font-family:"Spectral";font-weight:600;font-size:40px;margin:14px 0 2px}
+.plan .price small{font-family:"Libre Franklin",sans-serif;font-size:15px;font-weight:600;color:var(--muted)}
+.plan .pdesc{color:var(--muted);font-size:14px;min-height:62px;margin-top:8px}
+.plan ul{list-style:none;margin:18px 0 22px;display:flex;flex-direction:column;gap:11px;border-top:1px solid var(--line);padding-top:18px}
+.plan li{display:flex;gap:9px;font-size:14px;color:#2C3B36}
+.plan li .ck{color:var(--teal);flex:0 0 auto;margin-top:2px}
+.plan .btn{width:100%}
+.price-foot{margin-top:30px;text-align:center;color:var(--muted-2);font-size:14px;font-weight:600}
+.price-foot span{margin:0 14px}
+
+/* faq */
+.faq-grid{display:grid;grid-template-columns:1fr 1fr;gap:0 56px;max-width:1040px;margin:0 auto}
+.faq-item{border-top:1px solid var(--line-strong);padding:24px 0}
+.faq-item h4{font-family:"Spectral";font-weight:600;font-size:18px;margin-bottom:9px}
+.faq-item p{color:var(--muted);font-size:15px}
+
+/* final cta */
+.final h2{font-size:clamp(30px,4vw,46px);max-width:16ch;margin:0 auto;color:#fff}
+.final .lead{margin:20px auto 0;color:#A9C6BC}
+.final-cta{display:flex;gap:14px;justify-content:center;margin-top:32px;flex-wrap:wrap}
+
+/* footer */
+footer{background:#fff;border-top:1px solid var(--line);padding:62px 0 0}
+.foot-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px}
+.foot-brand p{color:var(--muted);font-size:14.5px;margin:14px 0 12px;max-width:320px}
+.foot-brand .mail{color:var(--ink);font-weight:600;font-size:14.5px}
+.eu-badge{display:inline-block;margin-top:16px;font-size:12px;font-weight:600;color:var(--muted);border:1px solid var(--line);border-radius:8px;padding:8px 13px}
+.foot-col h5{font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--muted-2);margin-bottom:16px}
+.foot-col a{display:block;color:#3A4D47;font-size:14.5px;margin-bottom:11px}
+.foot-col a:hover{color:var(--teal-600)}
+.foot-bottom{border-top:1px solid var(--line);margin-top:54px;padding:22px 0;text-align:center;color:var(--muted-2);font-size:13.5px;background:var(--bg-soft)}
+
+/* whatsapp floating button */
+.wa-float{
+  position:fixed;right:24px;bottom:24px;z-index:80;
+  width:60px;height:60px;border-radius:50%;
+  background:radial-gradient(circle at 30% 25%,#34e07a,#22b85a 70%);
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 12px 26px -6px rgba(18,140,70,.6),0 2px 6px rgba(0,0,0,.22);
+  transition:transform .16s ease, box-shadow .2s ease;
+  animation:waPulse 2.6s ease-out infinite;
+}
+.wa-float:hover{transform:translateY(-2px) scale(1.06)}
+.wa-float:active{transform:translateY(0) scale(.98)}
+.wa-float svg{width:32px;height:32px;fill:#fff}
+@keyframes waPulse{
+  0%{box-shadow:0 12px 26px -6px rgba(18,140,70,.6),0 0 0 0 rgba(37,211,102,.5)}
+  70%{box-shadow:0 12px 26px -6px rgba(18,140,70,.6),0 0 0 18px rgba(37,211,102,0)}
+  100%{box-shadow:0 12px 26px -6px rgba(18,140,70,.6),0 0 0 0 rgba(37,211,102,0)}
+}
+@media(max-width:760px){.wa-float{right:16px;bottom:16px;width:54px;height:54px}.wa-float svg{width:29px;height:29px}}
+
+/* responsive */
+@media(max-width:980px){
+  .nav-links{display:none}.nav-login{display:none}
+  .g4,.price-grid{grid-template-columns:1fr 1fr}
+  .g3{grid-template-columns:1fr}
+  .mini-grid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:760px){
+  .sec-pad{padding:64px 0}
+  .g2,.g4,.price-grid,.faq-grid,.foot-grid{grid-template-columns:1fr}
+  .plan.pop{transform:none;margin-top:8px}
+  .plan.pop:hover{transform:translateY(-4px)}
+  .plan:hover{transform:translateY(-4px)}
+  .cmp-row{grid-template-columns:1fr}
+  .cmp-row>div{border-top:1px solid var(--line)}
+  .cmp-h{display:none}
+  .mini-grid{grid-template-columns:1fr}
+  .hero h1{font-size:34px}
+}
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel" data-presets="react">
+const { useState } = React;
+
+const APP = "https://app.smrtadvice.es/auth/register";
+const LOGIN = "https://app.smrtadvice.es/auth/login";
+const MAIL = "mailto:contacto@smartadvice.es";
+const WA = "https://wa.me/34611403013";
+
+// Logo oficial de la marca (mismo asset que usa smrtadvice.es)
+const LOGO = "https://framerusercontent.com/images/FlcTYSpAwveQR4z2IwyTfAUJQ.png";
+const Logo = () => <img className="mark" src={LOGO} alt="Smart Advice" />;
+// Glifo claro para iconos sobre fondo oscuro (chips de profesionales)
+const Glyph = () => (
+  <svg width="20" height="20" viewBox="0 0 40 40" fill="none">
+    <path d="M20 2L38 20L20 38L2 20Z" fill="#E7F2ED"/>
+    <path d="M20 9.4L30.6 20L20 30.6L9.4 20Z" fill="none" stroke="#1E9C80" strokeWidth="2"/>
+    <path d="M20 16.4L23.6 20L20 23.6L16.4 20Z" fill="#1E9C80"/>
+  </svg>
+);
+const Check = ({cls="ck"}) => (
+  <svg className={cls} width="16" height="16" viewBox="0 0 20 20" fill="none">
+    <path d="M16.5 5.5l-8 8L4 9" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"/>
+  </svg>
+);
+const Arrow = () => (
+  <svg width="16" height="16" viewBox="0 0 20 20" fill="none">
+    <path d="M4 10h11M11 5l5 5-5 5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+  </svg>
+);
+const WhatsApp = () => (
+  <svg width="18" height="18" viewBox="0 0 32 32" fill="#25D366" aria-hidden="true">
+    <path d="M16 .5C7.4.5.5 7.4.5 16c0 2.8.7 5.5 2.1 7.9L.4 31.5l7.8-2C10.5 30.8 13.2 31.5 16 31.5c8.6 0 15.5-6.9 15.5-15.5S24.6.5 16 .5zm0 28c-2.5 0-5-.7-7.1-1.9l-.5-.3-4.6 1.2 1.2-4.5-.3-.5C3.3 21.2 2.5 18.6 2.5 16 2.5 8.5 8.5 2.5 16 2.5S29.5 8.5 29.5 16 23.5 28.5 16 28.5z"/>
+    <path d="M24.1 19.6c-.4-.2-2.4-1.2-2.8-1.3-.4-.1-.6-.2-.9.2-.3.4-1 1.3-1.2 1.5-.2.2-.4.3-.8.1-.4-.2-1.7-.6-3.3-2-1.2-1.1-2-2.4-2.3-2.8-.2-.4 0-.6.2-.8.2-.2.4-.4.6-.7.2-.2.2-.4.4-.6.1-.2.1-.4 0-.6-.1-.2-.9-2.1-1.2-2.9-.3-.7-.6-.6-.9-.6h-.7c-.3 0-.6.1-1 .5-.3.4-1.3 1.3-1.3 3.1s1.3 3.6 1.5 3.9c.2.3 2.6 4 6.3 5.6.9.4 1.6.6 2.1.8.9.3 1.7.2 2.3.1.7-.1 2.4-1 2.7-1.9.3-.9.3-1.7.2-1.9-.1-.2-.3-.3-.7-.5z"/>
+  </svg>
+);
+
+/* ---------------- HEADER ---------------- */
+function Header(){
+  return (
+    <header className="nav">
+      <div className="wrap nav-inner">
+        <a className="brand" href="#top"><Logo/>Smart Advice</a>
+        <nav className="nav-links">
+          <a href="#features">Features</a>
+          <a href="#como-funciona">Cómo funciona</a>
+          <a href="#precios">Precios</a>
+          <a href={MAIL}>Contacto</a>
+        </nav>
+        <div className="nav-right">
+          <a className="nav-login" href={LOGIN}>Iniciar sesión</a>
+          <a className="btn btn-primary" href={APP}>Probar gratis 30 días <Arrow/></a>
+        </div>
+      </div>
+    </header>
+  );
+}
+
+/* ---------------- HERO ---------------- */
+function Hero(){
+  return (
+    <section className="hero center" id="top">
+      <div className="wrap">
+        <span className="badge"><Check/> IA Validada · Basada en legislación española vigente</span>
+        <h1 className="serif">Tu copiloto empresarial: <span className="accent">decisiones informadas,</span> riesgos bajo control</h1>
+        <p className="lead">Smart Advice combina inteligencia artificial con el respaldo de profesionales especializados para ayudarte a gestionar riesgos legales, industriales, de ciberseguridad y seguros — todo en un solo lugar, a un coste accesible.</p>
+        <div className="hero-cta">
+          <a className="btn btn-teal" href={APP}>Probar gratis 30 días <Arrow/></a>
+          <a className="btn btn-ghost" href="#como-funciona">Ver cómo funciona</a>
+        </div>
+        <div className="trust">
+          <span><Check/> Sin tarjeta de crédito</span>
+          <span><Check/> Acceso inmediato</span>
+          <span><Check/> Cancela cuando quieras</span>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ---------------- PREVENCIÓN ---------------- */
+const prevs = [
+  ["Antes de firmar","Conoce los riesgos del contrato antes de comprometerte","Detecta cláusulas problemáticas, obligaciones ocultas y desequilibrios antes de poner tu firma."],
+  ["Antes de la sanción","Cumple con la normativa antes de que te inspeccionen","SMAD identifica los incumplimientos más frecuentes en RGPD, laboral y consumo antes de que llegue la multa."],
+  ["Antes del conflicto","Elige la mejor posición antes de que surja la disputa","Conoce tus derechos y obligaciones cuando aún hay margen para negociar o reposicionarte."],
+  ["Antes del siniestro","Identifica las lagunas de cobertura antes de necesitarlas","Descubre si tu empresa está bien asegurada antes de que ocurra un incidente industrial o ciberataque."],
+];
+function Prevencion(){
+  return (
+    <section className="sec-pad sec-dark">
+      <div className="wrap">
+        <div className="head-left">
+          <h2 className="serif" style={{fontSize:"clamp(28px,3.6vw,42px)",color:"#fff",maxWidth:"22ch"}}>La mayoría de empresas buscan ayuda cuando el problema ya existe. SMAD te ayuda a detectarlo antes.</h2>
+          <p className="lead" style={{marginTop:18}}>Cuatro momentos en los que anticiparte marca toda la diferencia.</p>
+        </div>
+        <div className="grid g4">
+          {prevs.map((p,i)=>(
+            <div className="prev-card" key={i}>
+              <div className="kicker">{p[0]}</div>
+              <div className="ttl">{p[1]}</div>
+              <p>{p[2]}</p>
+            </div>
+          ))}
+        </div>
+        <div className="afterline">Ese es el verdadero valor de SMAD: <em>actuar antes, no después.</em></div>
+      </div>
+    </section>
+  );
+}
+
+/* ---------------- 9 PREGUNTAS ---------------- */
+const questions = [
+  "¿Este contrato que me piden firmar tiene alguna trampa o riesgo oculto?",
+  "¿Puedo despedir a este trabajador sin exponerme a una demanda?",
+  "¿Cumplo con la normativa de protección de datos o estoy expuesto a una sanción?",
+  "¿Mi empresa está bien asegurada o tengo lagunas de cobertura que no conozco?",
+  "¿Cómo registro mi marca para que nadie me la pueda quitar?",
+  "¿Qué significa esta acta de infracción que me ha enviado la administración?",
+  "¿Cuáles son mis obligaciones en prevención de riesgos laborales?",
+  "Tengo una factura impagada desde hace meses, ¿cómo la reclamo?",
+  "¿Mi empresa es vulnerable a un ciberataque? ¿Qué medidas mínimas debo tener?",
+];
+function Preguntas(){
+  return (
+    <section className="sec-pad sec-soft">
+      <div className="wrap">
+        <div className="head-block center">
+          <div className="eyebrow">9 preguntas reales</div>
+          <h2 className="serif" style={{fontSize:"clamp(28px,3.8vw,44px)",marginTop:14}}>Las preguntas que frenan tu empresa cada semana</h2>
+          <p className="lead" style={{margin:"16px auto 0"}}>Estas son las consultas que llegan a despachos de abogados, gestorías y asesorías a diario. Con Smart Advice, las resuelves en segundos.</p>
+        </div>
+        <div className="grid g3">
+          {questions.map((q,i)=>(
+            <div className="q-card" key={i}>
+              <div className="qm">&ldquo;</div>
+              <p>{q}</p>
+            </div>
+          ))}
+        </div>
+        <div className="center-note">Smart Advice responde estas preguntas en segundos. Sin esperar turno. Sin pagar por cada consulta.</div>
+      </div>
+    </section>
+  );
+}
+
+/* ---------------- COMPARATIVA ---------------- */
+const rows = [
+  ["Diseño y enfoque","Uso general, para todo tipo de consultas","Diseñado exclusivamente para PYMEs españolas"],
+  ["Fuente de información","Información de internet, sin verificar","Fuentes legales y técnicas verificadas por expertos"],
+  ["Legislación española","Puede confundir normativas de distintos países","Solo legislación española vigente"],
+  ["Riesgos empresariales","No identifica riesgos específicos de tu actividad","Prevención y gestión de riesgos especializados"],
+  ["Seguros y cobertura","Sin análisis de pólizas ni lagunas de cobertura","Análisis de riesgos asegurables y coberturas"],
+  ["Ciberseguridad","Respuestas genéricas sin contexto empresarial","Orientación técnica adaptada a PYMEs"],
+  ["Profesionales detrás","Sin acceso a expertos reales","Abogados, ingenieros, corredores y expertos reales"],
+  ["Trazabilidad de respuestas","No cita fuentes ni artículos concretos","Cada respuesta cita el artículo y documento de origen"],
+];
+function Comparativa(){
+  return (
+    <section className="sec-pad">
+      <div className="wrap">
+        <div className="head-block center">
+          <div className="eyebrow">Por qué Smart Advice</div>
+          <h2 className="serif" style={{fontSize:"clamp(28px,3.8vw,44px)",marginTop:14}}>¿Por qué no usar simplemente una app de IA?</h2>
+          <p className="lead" style={{margin:"16px auto 0"}}>Muchos empresarios ya usan apps de IA genéricas para resolver dudas. Aquí está la diferencia real.</p>
+        </div>
+        <div className="cmp">
+          <div className="cmp-row cmp-h">
+            <div className="c-feat"></div>
+            <div className="c-gen"><b>IA genérica</b><small>Herramientas de uso general</small></div>
+            <div className="c-sa">Smart Advice</div>
+          </div>
+          {rows.map((r,i)=>(
+            <div className="cmp-row" key={i}>
+              <div className="c-feat">{r[0]}</div>
+              <div className="c-gen">— {r[1]}</div>
+              <div className="c-sa"><Check/> {r[2]}</div>
+            </div>
+          ))}
+        </div>
+        <div className="cmp-foot">La IA genérica responde. <b>Smart Advice asesora con criterio profesional y fuentes verificadas.</b></div>
+      </div>
+    </section>
+  );
+}
+
+/* ---------------- PRODUCTO EN USO ---------------- */
+function Dots(){return(<><span className="dot" style={{background:"#F1655B"}}></span><span className="dot" style={{background:"#F4BE4F"}}></span><span className="dot" style={{background:"#5BC277"}}></span></>);}
+function Producto(){
+  return (
+    <section className="sec-pad sec-soft" id="como-funciona">
+      <div className="wrap">
+        <div className="head-block center">
+          <div className="eyebrow">El producto en uso</div>
+          <h2 className="serif" style={{fontSize:"clamp(28px,3.8vw,44px)",marginTop:14}}>Así trabaja Smart Advice</h2>
+          <p className="lead" style={{margin:"16px auto 0"}}>Del primer mensaje al contacto con el experto. Cuatro momentos reales de uso.</p>
+        </div>
+        <div className="grid g2">
+          {/* 1 chat */}
+          <div className="mock">
+            <div className="mock-bar"><Dots/><span className="mock-title">CONSULTA LEGAL — Smart Advice Chat</span></div>
+            <div className="mock-body">
+              <div className="mock-step">01 / El usuario pregunta en lenguaje natural</div>
+              <div className="bubble-user">Quiero despedir a un empleado que lleva 2 años en la empresa. Tiene contrato indefinido. ¿Cómo lo hago correctamente y qué costes tendría?</div>
+              <div className="bubble-ai"><b>Para un despido objetivo en España</b> con contrato indefinido y 2 años de antigüedad, los pasos principales son: 1. Notificación por escrito con causa justificada. 2. Preaviso de 15 días. 3. Indemnización: 20 días/año trabajado. Para 2 años: aproximadamente 1,33 meses de salario bruto.
+                <div className="chips"><span className="chip">Art. 52 ET</span><span className="chip">Art. 53 ET</span><span className="chip">RDL 2/2015</span></div>
+              </div>
+            </div>
+          </div>
+          {/* 2 contrato */}
+          <div className="mock">
+            <div className="mock-bar"><Dots/><span className="mock-title">ANÁLISIS DE CONTRATO — Smart Advice</span></div>
+            <div className="mock-body">
+              <div className="mock-step">02 / Análisis de un contrato adjuntado</div>
+              <div className="bubble-user">Te adjunto el contrato de distribución que me han enviado. ¿Qué cláusulas debería revisar antes de firmarlo?</div>
+              <div className="risk hi"><h5>RIESGO ALTO — Cláusula 7.3</h5><p>Penalización por resolución anticipada desproporcionada: 18 meses de facturación estimada. Recomendación: negociar reducción a 3-6 meses.</p></div>
+              <div className="risk mid"><h5>RIESGO MEDIO — Cláusula 12</h5><p>Exclusividad territorial sin límite temporal definido. Puede restringir operaciones futuras.</p></div>
+              <div className="risk ok"><h5>FAVORABLE — Cláusula 4</h5><p>Condiciones de pago en línea con uso mercantil habitual. Sin observaciones.</p></div>
+            </div>
+          </div>
+          {/* 3 panel riesgos */}
+          <div className="mock">
+            <div className="mock-bar"><Dots/><span className="mock-title">PANEL DE RIESGOS — Smart Advice</span></div>
+            <div className="mock-body">
+              <div className="mock-step">03 / Detección de riesgos activos en tu empresa</div>
+              {[["Protección de datos (RGPD)","Revisión necesaria","st-red"],
+                ["Contrato con proveedor principal","Cláusula problemática","st-red"],
+                ["Cobertura de seguro RC","Laguna detectada","st-or"],
+                ["Prevención riesgos laborales","Documentación incompleta","st-or"],
+                ["Registro de marca","Sin incidencias","st-gr"],
+                ["Obligaciones fiscales trimestrales","Al día","st-gr"]].map((r,i)=>(
+                <div className="panel-row" key={i}><span>{r[0]}</span><span className={"badge-st "+r[2]}>{r[1]}</span></div>
+              ))}
+            </div>
+          </div>
+          {/* 4 profesionales */}
+          <div className="mock">
+            <div className="mock-bar"><Dots/><span className="mock-title">ACCESO A PROFESIONALES — Smart Advice</span></div>
+            <div className="mock-body">
+              <div className="mock-step">04 / Cuando necesitas contrastar con un profesional real</div>
+              <div className="bubble-ai">He analizado tu situación sobre el despido. Si quieres confirmar esta información con un abogado laboralista o necesitas que gestione el proceso directamente, puedes contactar con el equipo de profesionales de Smart Advice desde aquí.</div>
+              <a className="prof-btn" href={APP} style={{display:"block"}}><b>Contactar con un abogado laboralista</b><small>Respuesta en menos de 24h vía WhatsApp o email</small></a>
+              <div className="mini-grid">
+                <div className="mini"><b>Abogado mercantil</b><small>Contratos y sociedades</small></div>
+                <div className="mini"><b>Experto RGPD</b><small>Protección de datos</small></div>
+                <div className="mini"><b>Corredor de seguros</b><small>Coberturas y siniestros</small></div>
+                <div className="mini"><b>Ingeniero de riesgos</b><small>Industria y operaciones</small></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ---------------- 10 ÁREAS ---------------- */
+const areas = [
+  ["Legal","Derecho mercantil y contratos","Análisis y redacción de contratos. Detecta cláusulas problemáticas antes de firmar."],
+  ["Legal","Laboral y Seguridad Social","Despidos, contratos, cotizaciones y conflictos con empleados."],
+  ["Legal","Protección de Datos (RGPD)","Cumplimiento, políticas de privacidad y gestión de incidencias."],
+  ["Legal","Administrativo y sanciones","Respuesta a actas de infracción, recursos y relación con la administración."],
+  ["Legal","Marcas y propiedad intelectual","Registro, protección y defensa de tu marca frente a terceros."],
+  ["Seguros","Seguros empresariales","Análisis de pólizas, detección de lagunas de cobertura y gestión de siniestros."],
+  ["Ciber","Ciberseguridad","Riesgos digitales, cumplimiento normativo y protección de datos empresariales."],
+  ["Fiscal","Fiscal y tributario","Obligaciones fiscales, dudas recurrentes y detección de riesgos tributarios."],
+  ["Riesgos","Prevención de riesgos laborales","Obligaciones, documentación necesaria y protocolos de seguridad laboral."],
+  ["Riesgos","Ingeniería de riesgos industriales","Riesgos operativos, fuentes de pérdida y necesidades de protección técnica."],
+];
+function Areas(){
+  return (
+    <section className="sec-pad" id="features">
+      <div className="wrap">
+        <div className="head-block center">
+          <div className="eyebrow">10 áreas críticas</div>
+          <h2 className="serif" style={{fontSize:"clamp(28px,3.8vw,44px)",marginTop:14}}>Todo lo que tu empresa necesita, en un solo lugar</h2>
+          <p className="lead" style={{margin:"16px auto 0"}}>10 áreas críticas para las PYMEs españolas: desde derecho mercantil hasta ciberseguridad, seguros e ingeniería de riesgos.</p>
+        </div>
+        <div className="grid g2">
+          {areas.map((a,i)=>(
+            <div className="area" key={i}>
+              <div className="cat">{a[0]}</div>
+              <div>
+                <div className="ttl">{a[1]}</div>
+                <p>{a[2]}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ---------------- PILARES ---------------- */
+const pillars = [
+  ["01","IA entrenada con información verificada por expertos","No toma datos aleatorios de internet. Cada respuesta se basa en legislación, normativas y criterios técnicos españoles vigentes, validados por el equipo de Smart Advice."],
+  ["02","Siempre sabes de dónde viene la información","Cada respuesta cita el artículo y el documento de origen. Transparencia total. Sin respuestas inventadas ni alucinaciones."],
+  ["03","Cuando necesitas más, tienes profesionales reales","Accede directamente a abogados, ingenieros de riesgos, expertos en ciberseguridad y corredores de seguros. Todo en el mismo lugar, sin empezar desde cero."],
+];
+function Pilares(){
+  return (
+    <section className="sec-pad sec-dark">
+      <div className="wrap">
+        <div className="head-left">
+          <h2 className="serif" style={{fontSize:"clamp(28px,3.6vw,42px)",color:"#fff",maxWidth:"20ch"}}>No es solo IA. Es un copiloto empresarial con profesionales reales detrás.</h2>
+          <p className="lead" style={{marginTop:18}}>Tres pilares que hacen diferente a Smart Advice.</p>
+        </div>
+        <div className="grid g3">
+          {pillars.map((p,i)=>(
+            <div className="pillar" key={i}>
+              <div className="num">{p[0]}</div>
+              <div className="ttl">{p[1]}</div>
+              <p>{p[2]}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ---------------- PROFESIONALES ---------------- */
+const pros = [
+  ["Abogados","Mercantil, civil, laboral, administrativo y penal empresarial. Especializados en PYMEs españolas."],
+  ["Delegados de Protección de Datos","Expertos en RGPD, políticas de privacidad y cumplimiento normativo en materia de datos."],
+  ["Especialistas en Compliance","Implementación de sistemas de cumplimiento normativo penal y regulatorio para empresas."],
+  ["Expertos en Ciberseguridad","Evaluación de riesgos tecnológicos, protección de datos empresariales y respuesta a incidentes."],
+  ["Asesores fiscales","Orientación tributaria especializada y planificación fiscal para pequeñas y medianas empresas."],
+  ["Corredores de seguros","Análisis de riesgos asegurables y búsqueda de las pólizas más adecuadas en el mercado."],
+  ["Ingenieros de riesgos industriales","Evaluación de riesgos operativos, seguridad industrial y necesidades de protección técnica."],
+  ["Especialistas en prevención laboral","Obligaciones PRL, documentación, protocolos y evaluación de riesgos en el puesto de trabajo."],
+];
+function Profesionales(){
+  return (
+    <section className="sec-pad sec-soft">
+      <div className="wrap">
+        <div className="head-block center">
+          <div className="eyebrow">Quién está detrás</div>
+          <h2 className="serif" style={{fontSize:"clamp(28px,3.8vw,44px)",marginTop:14}}>Un ecosistema de profesionales especializados</h2>
+          <p className="lead" style={{margin:"16px auto 0"}}>Cuando la IA no es suficiente, detrás de Smart Advice hay profesionales reales con experiencia en cada área. Sin intermediarios. Sin colas.</p>
+        </div>
+        <div className="grid g4">
+          {pros.map((p,i)=>(
+            <div className="pro-card" key={i}>
+              <div className="pro-ic"><Glyph/></div>
+              <div className="ttl">{p[0]}</div>
+              <p>{p[1]}</p>
+            </div>
+          ))}
+        </div>
+        <div className="pro-banner">
+          <div className="pro-ic" style={{flex:"0 0 auto"}}><Glyph/></div>
+          <p><b>Los planes Pro y Business incluyen consultas mensuales directas con estos profesionales,</b> canalizadas por WhatsApp o email. Sin necesidad de buscar al experto adecuado: Smart Advice te conecta con el que necesitas.</p>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ---------------- PASOS ---------------- */
+const steps = [
+  ["1","Escribe tu duda","Cuéntale tu situación en lenguaje normal. No necesitas saber de derecho, seguros ni ingeniería. Smart Advice entiende el contexto."],
+  ["2","Recibe una respuesta fundamentada","En segundos, con referencias a la legislación, normativa o criterio técnico aplicable. Sabrás exactamente en qué se basa cada respuesta."],
+  ["3","Contrasta con un profesional si lo necesitas","Si quieres verificar la información o necesitas asistencia especializada, contacta directamente con los profesionales de Smart Advice a través de la plataforma."],
+];
+function Pasos(){
+  return (
+    <section className="sec-pad">
+      <div className="wrap">
+        <div className="head-block center">
+          <div className="eyebrow">Cómo empezar</div>
+          <h2 className="serif" style={{fontSize:"clamp(28px,3.8vw,44px)",marginTop:14}}>Tan sencillo como preguntarle a un colega experto</h2>
+        </div>
+        <div className="grid g3">
+          {steps.map((s,i)=>(
+            <div className="step" key={i}>
+              <div className="n serif">{s[0]}</div>
+              <div className="ttl">{s[1]}</div>
+              <p>{s[2]}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ---------------- PRECIOS ---------------- */
+const plans = [
+  {name:"Prueba gratuita",price:"0 €",per:"/ 30 días",desc:"Acceso a funcionalidades básicas de la IA. Sin tarjeta. Sin permanencia.",
+   feats:["Consultas básicas con IA","Acceso a 10 áreas","Sin soporte humano"],cta:"Empezar gratis",style:"ghost"},
+  {name:"Starter",price:"9 €",per:"/ mes",desc:"Para autónomos y pequeñas empresas que quieren orientación básica y resolución rápida de dudas.",
+   feats:["Acceso limitado a la IA","Consultas básicas","Generación de documentos","Herramientas de análisis básicas"],cta:"Contratar",style:"ghost"},
+  {name:"Pro",price:"49 €",per:"/ mes",pop:true,desc:"Para empresas que necesitan acompañamiento constante en decisiones y gestión de riesgos.",
+   feats:["IA avanzada sin límite","Análisis documental y contractual","Prevención de riesgos","5 consultas/mes con profesionales","Mercantil, civil, RGPD, laboral, admin","Vía WhatsApp o email"],cta:"Contratar Pro",style:"teal"},
+  {name:"Business",price:"69 €",per:"/ mes",desc:"Sistema de apoyo completo y transversal en todas las áreas.",
+   feats:["Todo lo del plan Pro","10 consultas/mes con especialistas","+ Asesoría fiscal","+ Ciberseguridad","+ Prevención riesgos laborales","+ Ingeniería industrial","+ Corredores de seguros"],cta:"Contratar Business",style:"primary"},
+];
+function Precios(){
+  return (
+    <section className="sec-pad sec-soft" id="precios">
+      <div className="wrap">
+        <div className="head-block center">
+          <div className="eyebrow">Precios</div>
+          <h2 className="serif" style={{fontSize:"clamp(28px,3.8vw,44px)",marginTop:14}}>Un precio fijo. Sin sorpresas.</h2>
+          <p className="lead" style={{margin:"16px auto 0"}}>Elige el plan que se adapta a tu empresa. Empieza gratis, sin tarjeta de crédito.</p>
+        </div>
+        <div className="price-grid">
+          {plans.map((p,i)=>(
+            <div className={"plan"+(p.pop?" pop":"")} key={i}>
+              {p.pop && <div className="pop-tag">★ Más popular</div>}
+              <div className="pname">{p.name}</div>
+              <div className="price serif">{p.price}<small> {p.per}</small></div>
+              <p className="pdesc">{p.desc}</p>
+              <ul>{p.feats.map((f,j)=>(<li key={j}><Check/> {f}</li>))}</ul>
+              <a className={"btn btn-"+p.style} href={APP}>{p.cta}</a>
+            </div>
+          ))}
+        </div>
+        <div className="price-foot"><span>Consultas por WhatsApp o email</span>|<span>Cancela en cualquier momento</span>|<span>Sin permanencia</span></div>
+      </div>
+    </section>
+  );
+}
+
+/* ---------------- FAQ ---------------- */
+const faqs = [
+  ["¿Qué es Smart Advice?","Un copiloto empresarial con IA entrenado con información verificada por expertos. Permite a las PYMEs resolver dudas legales, industriales, de ciberseguridad y seguros — y conectar con profesionales especializados cuando lo necesiten."],
+  ["¿Cómo funciona?","Escribes tu consulta en lenguaje normal, el sistema busca en su base documental verificada y responde citando los artículos y normativas aplicables. Puedes adjuntar contratos u otros documentos para que los analice."],
+  ["¿Las respuestas son asesoramiento oficial?","Las respuestas tienen carácter informativo y se basan en documentación verificada. Para decisiones importantes, Smart Advice te conecta con profesionales especializados del equipo."],
+  ["¿Puedo contactar con un profesional real?","Sí. Los planes Pro y Business incluyen consultas mensuales con abogados, asesores fiscales, expertos en ciberseguridad, ingenieros de riesgos y corredores de seguros, según el plan contratado."],
+  ["¿La información que comparto es segura?","Sí. Cada usuario solo accede a sus propias sesiones. Los datos se almacenan con estándares de seguridad del sector."],
+  ["¿Puedo usar Smart Advice desde cualquier dispositivo?","Sí, funciona desde cualquier navegador web, incluyendo móviles y tablets. Sin necesidad de instalar ninguna aplicación."],
+];
+function Faq(){
+  return (
+    <section className="sec-pad">
+      <div className="wrap">
+        <h2 className="serif" style={{fontSize:"clamp(28px,3.6vw,42px)",marginBottom:34}}>Preguntas frecuentes</h2>
+        <div className="faq-grid">
+          {faqs.map((f,i)=>(
+            <div className="faq-item" key={i}><h4>{f[0]}</h4><p>{f[1]}</p></div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ---------------- FINAL CTA ---------------- */
+function FinalCta(){
+  return (
+    <section className="sec-pad sec-dark final center">
+      <div className="wrap">
+        <h2 className="serif">Tu empresa toma mejores decisiones cuando tiene el respaldo adecuado.</h2>
+        <p className="lead">Empieza gratis hoy. Sin tarjeta de crédito. Sin compromiso.</p>
+        <div className="final-cta">
+          <a className="btn btn-teal" href={APP}>Probar Smart Advice gratis <Arrow/></a>
+          <a className="btn btn-ghost" href="#precios">Ver los planes</a>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ---------------- FOOTER ---------------- */
+function Footer(){
+  return (
+    <footer>
+      <div className="wrap foot-grid">
+        <div className="foot-brand">
+          <a className="brand" href="#top"><Logo/>Smart Advice</a>
+          <p>El copiloto empresarial de las PYMEs españolas. IA verificada + acceso a profesionales reales.</p>
+          <a className="mail" href={MAIL}>contacto@smartadvice.es</a>
+          <div className="eu-badge">🇪🇺 Financiado por la Unión Europea · NextGenerationEU</div>
+        </div>
+        <div className="foot-col">
+          <h5>Producto</h5>
+          <a href="#features">Features</a>
+          <a href="#precios">Precios</a>
+          <a href="#como-funciona">Cómo funciona</a>
+          <a href="/changelog">Changelog</a>
+        </div>
+        <div className="foot-col">
+          <h5>Legal</h5>
+          <a href="/aviso-legal">Aviso Legal</a>
+          <a href="/privacidad">Política de Privacidad</a>
+          <a href="/politica-cookies">Política de Cookies</a>
+          <a href="/terminos-uso">Términos de Uso</a>
+          <a href="/condiciones-contratacion">Condiciones de Contratación</a>
+        </div>
+        <div className="foot-col">
+          <h5>Contacto</h5>
+          <a href={MAIL}>contacto@smartadvice.es</a>
+          <a href={WA} target="_blank" rel="noopener" style={{display:"inline-flex",alignItems:"center",gap:"8px"}}><WhatsApp/> WhatsApp Business</a>
+        </div>
+      </div>
+      <div className="foot-bottom">Smart Advice. Todos los derechos reservados. 2026</div>
+    </footer>
+  );
+}
+
+function WaFloat(){
+  return (
+    <a className="wa-float" href={WA} target="_blank" rel="noopener"
+       aria-label="Contactar por WhatsApp" title="Escríbenos por WhatsApp">
+      <svg viewBox="0 0 32 32" aria-hidden="true">
+        <path d="M16 .5C7.4.5.5 7.4.5 16c0 2.8.7 5.5 2.1 7.9L.4 31.5l7.8-2C10.5 30.8 13.2 31.5 16 31.5c8.6 0 15.5-6.9 15.5-15.5S24.6.5 16 .5zm0 28c-2.5 0-5-.7-7.1-1.9l-.5-.3-4.6 1.2 1.2-4.5-.3-.5C3.3 21.2 2.5 18.6 2.5 16 2.5 8.5 8.5 2.5 16 2.5S29.5 8.5 29.5 16 23.5 28.5 16 28.5z"/>
+        <path d="M24.1 19.6c-.4-.2-2.4-1.2-2.8-1.3-.4-.1-.6-.2-.9.2-.3.4-1 1.3-1.2 1.5-.2.2-.4.3-.8.1-.4-.2-1.7-.6-3.3-2-1.2-1.1-2-2.4-2.3-2.8-.2-.4 0-.6.2-.8.2-.2.4-.4.6-.7.2-.2.2-.4.4-.6.1-.2.1-.4 0-.6-.1-.2-.9-2.1-1.2-2.9-.3-.7-.6-.6-.9-.6h-.7c-.3 0-.6.1-1 .5-.3.4-1.3 1.3-1.3 3.1s1.3 3.6 1.5 3.9c.2.3 2.6 4 6.3 5.6.9.4 1.6.6 2.1.8.9.3 1.7.2 2.3.1.7-.1 2.4-1 2.7-1.9.3-.9.3-1.7.2-1.9-.1-.2-.3-.3-.7-.5z"/>
+      </svg>
+    </a>
+  );
+}
+
+function App(){
+  return (<>
+    <Header/><Hero/><Prevencion/><Preguntas/><Comparativa/><Producto/>
+    <Areas/><Pilares/><Profesionales/><Pasos/><Precios/><Faq/><FinalCta/><Footer/>
+    <WaFloat/>
+  </>);
+}
+ReactDOM.createRoot(document.getElementById("root")).render(<App/>);
+</script>
+</body>
+</html>
