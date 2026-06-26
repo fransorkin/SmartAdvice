@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Smart Advice — Tu copiloto empresarial</title>
 <meta name="description" content="Smart Advice combina inteligencia artificial con el respaldo de profesionales especializados para gestionar riesgos legales, industriales, de ciberseguridad y seguros." />
+<link rel="canonical" href="https://smartadvice.es/" />
 <link rel="icon" type="image/png" href="https://framerusercontent.com/images/FlcTYSpAwveQR4z2IwyTfAUJQ.png" />
 <link rel="apple-touch-icon" href="https://framerusercontent.com/images/FlcTYSpAwveQR4z2IwyTfAUJQ.png" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -152,6 +153,7 @@ header.nav{
 .nav-right{display:flex;align-items:center;gap:20px}
 .nav-login{font-size:15px;font-weight:600;color:#33453F}
 .nav-login:hover{color:var(--teal-600)}
+.nav-cta svg{flex:0 0 auto}
 .menu-btn{display:none;background:none;border:0;cursor:pointer}
 
 /* ---- hero ---- */
@@ -373,6 +375,12 @@ footer{background:#fff;border-top:1px solid var(--line);padding:62px 0 0}
   .cmp-h{display:none}
   .mini-grid{grid-template-columns:1fr}
   .hero h1{font-size:34px}
+  .nav-inner{height:64px;gap:14px}
+  .brand{gap:8px;font-size:16px}
+  .brand .mark{height:26px}
+  .nav-right{gap:0}
+  .nav-cta{padding:12px 18px;font-size:13px;border-radius:12px}
+  .nav-cta svg{width:14px;height:14px}
 }
 </style>
 </head>
@@ -386,7 +394,7 @@ const LOGIN = "https://app.smrtadvice.es/auth/login";
 const MAIL = "mailto:contacto@smartadvice.es";
 const WA = "https://wa.me/34611403013";
 
-// Logo oficial de la marca (mismo asset que usa smrtadvice.es)
+// Logo oficial de la marca
 const LOGO = "https://framerusercontent.com/images/FlcTYSpAwveQR4z2IwyTfAUJQ.png";
 const Logo = () => <img className="mark" src={LOGO} alt="Smart Advice" />;
 // Glifo claro para iconos sobre fondo oscuro (chips de profesionales)
@@ -428,7 +436,7 @@ function Header(){
         </nav>
         <div className="nav-right">
           <a className="nav-login" href={LOGIN}>Iniciar sesión</a>
-          <a className="btn btn-primary" href={APP}>Probar gratis 30 días <Arrow/></a>
+          <a className="btn btn-primary nav-cta" href={APP}>Probar gratis 30 días <Arrow/></a>
         </div>
       </div>
     </header>
@@ -862,11 +870,11 @@ function Footer(){
         </div>
         <div className="foot-col">
           <h5>Legal</h5>
-          <a href="https://smrtadvice.es/aviso-legal">Aviso Legal</a>
-          <a href="https://smrtadvice.es/privacidad">Política de Privacidad</a>
-          <a href="https://smrtadvice.es/politica-cookies">Política de Cookies</a>
-          <a href="https://smrtadvice.es/terminos-uso">Términos de Uso</a>
-          <a href="https://smrtadvice.es/condiciones-contratacion">Condiciones de Contratación</a>
+          <a href="https://smartadvice.es/aviso-legal">Aviso Legal</a>
+          <a href="https://smartadvice.es/privacidad">Política de Privacidad</a>
+          <a href="https://smartadvice.es/politica-cookies">Política de Cookies</a>
+          <a href="https://smartadvice.es/terminos-uso">Términos de Uso</a>
+          <a href="https://smartadvice.es/condiciones-contratacion">Condiciones de Contratación</a>
         </div>
         <div className="foot-col">
           <h5>Contacto</h5>

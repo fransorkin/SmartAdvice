@@ -26,11 +26,11 @@ jobs:
         run: |
           set -euo pipefail
           urls=(
-            "https://smrtadvice.es/aviso-legal"
-            "https://smrtadvice.es/privacidad"
-            "https://smrtadvice.es/politica-cookies"
-            "https://smrtadvice.es/terminos-uso"
-            "https://smrtadvice.es/condiciones-contratacion"
+            "https://smartadvice.es/aviso-legal"
+            "https://smartadvice.es/privacidad"
+            "https://smartadvice.es/politica-cookies"
+            "https://smartadvice.es/terminos-uso"
+            "https://smartadvice.es/condiciones-contratacion"
           )
 
           for url in "${urls[@]}"; do
